@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import reactMixin from 'react-mixin';
 import { ListenerMixin } from 'reflux';
 import Mozaik from 'mozaik/browser';
-// import Contacts from './Contacts';
+import Contacts from './Contacts';
 
 class Users extends Component {
 	constructor(props) {
@@ -33,7 +33,8 @@ class Users extends Component {
                     Users
                 </div>
                 <div className="widget__body">
-					{users.length}
+					<span className="users__count">{users.length}</span>
+					<Contacts />
 				</div>
 			</div>
 		);

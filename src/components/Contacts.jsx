@@ -27,7 +27,7 @@ class Contacts extends Component {
 		let totalCount = this.state.contacts.total_count;
 		
 		return(
-			<div>
+			<div className="contact__count">
 				Subscribers : {totalCount}
 			</div>
 		);
