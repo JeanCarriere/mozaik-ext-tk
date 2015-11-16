@@ -30,10 +30,13 @@ class Users extends Component {
 		return (
 			<div>
 				<div className="widget__header">
-                    Users
-                </div>
-                <div className="widget__body">
-					<span className="users__count">{users.length}</span>
+          Users
+          <i className="fa fa-users" />
+        </div>
+        <div className="widget__body">
+					<span className="users__count">{users.length}
+					<span className="users__body">active users</span>
+					</span>
 					<Contacts />
 				</div>
 			</div>
