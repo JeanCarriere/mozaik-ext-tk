@@ -1,0 +1,50 @@
+{
+  "name": "mozaik-ext-intercom",
+  "version": "0.0.1",
+  "description": "Mozaik intercom widget",
+  "main": "./src/components/index.js",
+  "scripts": {
+    "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js",
+    "eslint": "eslint ./src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fbentz/mozaik-ext-intercom.git"
+  },
+  "author": "Fabrice Bentz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fbentz/mozaik-ext-intercom/issues"
+  },
+  "homepage": "https://github.com/fbentz/mozaik-ext-intercom#README.md",
+  "dependencies": {
+    "intercom-client": "^2.1.0",
+    "babelify": "^6.1.3",
+    "chalk": "^1.1.0",
+    "convict": "^0.6.1",
+    "lodash": "^3.2.0",
+    "moment": "^2.10.3",
+    "moment-duration-format": "^1.3.0",
+    "react": "^0.13.3",
+    "react-mixin": "^1.7.0",
+    "reflux": "^0.2.5"
+  },
+  "devDependencies": {
+    "babel": "^5.8.12",
+    "babel-eslint": "^1.0.6",
+    "chai": "^3.2.0",
+    "eslint": "^0.15.1",
+    "jsdom": "^2.0.0",
+    "mocha": "^2.2.5",
+    "mockery": "^1.4.0",
+    "sinon": "^1.15.4"
+  },
+  "peerDependencies": {
+    "mozaik": "1.x"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}
