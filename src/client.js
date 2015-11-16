@@ -1,5 +1,6 @@
 var Intercom = require('intercom-client');
 var config = require('./config');
+var chalk = require('chalk');
 
 /**
  *  @param {Mozaik} mozaik
@@ -16,8 +17,18 @@ const client = function(mozaik) {
   const apiCalls = {
 
     getCompanies() {
-      console.log('Test');
-      return intercomClient.companies.list().then(res => res.body);
+      mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId : ${config.get('intercom.appId')}`));
+      return intercomClient.companies.list().then(res => res.body.companies);
+    },
+
+    getUsers() {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling users for appId : ${config.get('intercom.appId')}`));
+      return intercomClient.users.list().then(res => res.body.users);
+    },
+
+    getContacts() {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling contacts for appId : ${config.get('intercom.appId')}`));
+      return intercomClient.contacts.list().then(res => res.body);      
     }
 
   };
