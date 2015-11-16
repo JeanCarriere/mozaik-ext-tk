@@ -30,17 +30,17 @@ class Companies extends Component {
 
 		return (
 			<div>
-				 <div className="widget__header">
-                    Companies
-                    <span className="widget__header__count">
-                        {companies.length}
-                    </span>
-                    <i className="fa fa-github-alt" />
-                </div>
-                <div className="widget__body">
-				{companies.map(company => {
-					return <Company key={company.id} company={company} />
-				})}
+				<div className="widget__header">
+          Companies
+          <span className="widget__header__count">
+              {companies.length}
+          </span>
+          <i className="fa fa-building" />
+        </div>
+        <div className="widget__body">
+					{companies.map(company => {
+						return <Company key={company.id} company={company} />
+					})}
 				</div>
 			</div>
 		)
