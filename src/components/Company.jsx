@@ -5,7 +5,7 @@ class Company extends Component {
 		let { company } = this.props;
 		return (
 			<div className="list__item">
-				{ company.name }
+				{ company.name } - ({company.user_count})
 			</div>
 		)
 	}

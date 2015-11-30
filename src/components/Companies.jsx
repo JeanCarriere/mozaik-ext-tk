@@ -8,7 +8,8 @@ class Companies extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			companies: []
+			companies: [],
+			total: 0
 		};
 	}
 
@@ -18,22 +19,23 @@ class Companies extends Component {
 		}
 	}
 
-	onApiData(companies) {
+	onApiData(response) {
 		this.setState({
-			companies: companies
+			companies: response.companies,
+			total: response.total_count
 		});
 	}
 
 	render() {
 
-		let { companies } = this.state;
+		let { companies, total } = this.state;
 
 		return (
 			<div>
 				<div className="widget__header">
           Companies
           <span className="widget__header__count">
-              {companies.length}
+              {total}
           </span>
           <i className="fa fa-building" />
         </div>
