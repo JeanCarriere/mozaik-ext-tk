@@ -32,14 +32,14 @@ class Users extends Component {
 		return (
 			<div>
 				<div className="widget__header">
-          Users
-          <i className="fa fa-users" />
-        </div>
-        <div className="widget__body">
-					<span className="users__count">{totalUsers}
-					<span className="users__body">Subscriber users</span>
+          			Users
+          		<i className="fa fa-users" />
+        	</div>
+        	<div className="widget__body">
+					<span className="users__count">
+						{totalUsers}
+						<span className="users__body">Subscriber users</span>
 					</span>
-					<Contacts />
 				</div>
 			</div>
 		);
