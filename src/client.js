@@ -23,7 +23,7 @@ const client = function(mozaik) {
 
     getUsers() {
       mozaik.logger.info(chalk.yellow(`[intercom] calling users for appId : ${config.get('intercom.appId')}`));
-      return intercomClient.users.list().then(res => res.body.users);
+      return intercomClient.users.list().then(res => res.body);
     },
 
     getContacts() {

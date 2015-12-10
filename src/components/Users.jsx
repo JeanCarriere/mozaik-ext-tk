@@ -8,7 +8,8 @@ class Users extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			users: []
+			users: [],
+			totalUsers: 0
 		};
 	}
 
@@ -18,14 +19,15 @@ class Users extends Component {
 		}
 	}
 
-	onApiData(users) {
+	onApiData(body) {
 		this.setState({
-			users: users
+			users: body.users,
+			totalUsers: body.total_count
 		});
 	}
 
 	render() {
-		let { users } = this.state;
+		let { users, totalUsers } = this.state;
 
 		return (
 			<div>
@@ -34,8 +36,8 @@ class Users extends Component {
           <i className="fa fa-users" />
         </div>
         <div className="widget__body">
-					<span className="users__count">{users.length}
-					<span className="users__body">active users</span>
+					<span className="users__count">{totalUsers}
+					<span className="users__body">Subscriber users</span>
 					</span>
 					<Contacts />
 				</div>
