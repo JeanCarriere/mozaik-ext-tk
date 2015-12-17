@@ -29,6 +29,16 @@ const client = function(mozaik) {
     getContacts() {
       mozaik.logger.info(chalk.yellow(`[intercom] calling contacts for appId : ${config.get('intercom.appId')}`));
       return intercomClient.contacts.list().then(res => res.body);      
+    },
+
+    getUsersBySegment(params) {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling users for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
+      return intercomClient.users.listBy({segment_id: params.segment}).then(res => res.body);
+    },
+
+    getCompaniesBySegment(params) {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
+      return intercomClient.companies.listBy({segment_id: params.segment}).then(res => res.body);
     }
 
   };

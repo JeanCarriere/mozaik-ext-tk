@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-intercom",
-  "version": "1.0.6",
+  "version": "1.1.7",
   "description": "Mozaik intercom widget",
   "main": "./src/components/index.js",
   "scripts": {
