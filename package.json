@@ -1,7 +1,7 @@
 {
-  "name": "mozaik-ext-intercom",
-  "version": "1.1.7",
-  "description": "Mozaik intercom widget",
+  "name": "mozaik-ext-tk",
+  "version": "1.0.0",
+  "description": "Mozaik TK widget",
   "main": "./src/components/index.js",
   "scripts": {
     "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js",
@@ -9,14 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fbentz/mozaik-ext-intercom.git"
+    "url": "git+https://github.com/JeanCarriere/mozaik-ext-tk.git"
   },
-  "author": "Fabrice Bentz",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fbentz/mozaik-ext-intercom/issues"
-  },
-  "homepage": "https://github.com/fbentz/mozaik-ext-intercom#README.md",
+  "author": "Jean Carriere",
   "dependencies": {
     "intercom-client": "^2.1.0",
     "babelify": "^6.1.3",
