@@ -23,7 +23,7 @@
     "react": "^0.13.3",
     "react-mixin": "^1.7.0",
     "reflux": "^0.2.5",
-    "c3": "^0.4.9"
+    "c3": "^0.4.11-rc4"
   },
   "devDependencies": {
     "babel": "^5.8.12",
