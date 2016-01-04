@@ -33,6 +33,7 @@ class GaugeChart {
   }
 
   destroy () {
+  	console.log('destroy chart');	
   	this.chart.destroy();
   }
 }
@@ -67,22 +68,26 @@ class SegmentCompaniesCount extends Component {
 
 	onApiData(response) {
 		if(response.segment && response.segment.total_count) {
+			if(response.total.total_count !== this.state.total || !this.chart) {
+				if (this.chart) {
+					this.chart.destroy();
+			    }
+
+				var chartElement = React.findDOMNode(this.refs.chart);
+				this.chart = new GaugeChart(chartElement, {max: response.total.total_count, min:0}, ['data', response.segment.total_count]);
+			} else if(response.segment.total_count !== this.state.segment){
+				this.chart.load({
+					columns: [['data', response.segment.total_count]]
+				})
+			}
 			this.setState({
-				total: response.segment.total_count
+				segment: response.segment.total_count,
+				total: response.total.total_count,
 			});
-
-			if (this.chart) {
-				this.chart.destroy();
-		    }
-
-			var chartElement = React.findDOMNode(this.refs.chart);
-			this.chart = new GaugeChart(chartElement, {max: response.total.total_count, min:0}, ['data', response.segment.total_count]);
 		}
 	}
 
 	render() {
-		let { total } = this.state;
-		let { title } = this.props;
 		return (
 			<div>
 				<div className="widget__header">
