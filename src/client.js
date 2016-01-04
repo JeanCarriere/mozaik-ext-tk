@@ -38,7 +38,15 @@ const client = function(mozaik) {
 
     getCompaniesBySegment(params) {
       mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
-      return intercomClient.companies.listBy({segment_id: params.segment}).then(res => res.body);
+      return intercomClient.companies.listBy({segment_id: params.segment}).then(function(res) {
+        return intercomClient.companies.list().then(function(resTot) {
+          mozaik.logger.info(chalk.yellow(`restTot : ${resTot.body.total_count} ${res.body.total_count}`));
+          return {
+            segment:res.body,
+            total:resTot.body
+          }
+        });
+      });
     }
 
   };
