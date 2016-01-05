@@ -28,7 +28,7 @@ const client = function(mozaik) {
   if (!fs.existsSync(keyPath)) {
     mozaik.logger.error("Failed to find analytics .PEM file: %s -- ignoring API", keyPath);
   }
-  var analyzer = new Analyser(config.get('analytics.email'), fs.readFileSync(keyPath).toString());
+  var analyzer = new Analyser({serviceEmail:config.get('analytics.email'), serviceKey:fs.readFileSync(keyPath).toString()});
 
 
   const apiCalls = {
@@ -107,7 +107,7 @@ const client = function(mozaik) {
       });
     },
     getActiveUsers(params) {
-      return analyzer.getPageViews({
+      return analyzer.getActiveUsers({
         id: params.id,
         startDate: params.startDate,
         endDate: params.endDate

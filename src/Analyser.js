@@ -16,7 +16,7 @@ Analyzer.prototype.authorize = function () {
   return new Promise(function (resolve, reject) {
     self.jwtClient.authorize(function (err, tokens) {
       if (err) {
-        console.log(err);
+        console.log('err', arguments);
         return reject(err);
       }
       return resolve({ client: self.jwtClient, tokens: tokens });
@@ -34,12 +34,12 @@ Analyzer.prototype.authorize = function () {
 Analyzer.prototype.request = function (params, parseFunc, apiFunc) {
   var self = this;
   apiFunc = apiFunc || analytics.data.ga.get;
-
   return self.authorize().then(function (auth) {
     return new Promise(function (resolve, reject) {
       params.auth = auth.client;
       apiFunc(params, function (err, body) {
         if (err) {
+          console.log('err', err);
           return reject(err);
         }
         if (parseFunc) {
@@ -123,6 +123,20 @@ Analyzer.prototype.getPageViews = function (opts) {
     "start-date": opts.startDate || "7daysAgo",
     "end-date": opts.endDate || "yesterday",
     metrics: "ga:pageviews,ga:sessions",
+    dimensions: "ga:date"
+  };
+
+  return self.request(params, self.mapRequestResponse);
+};
+
+Analyzer.prototype.getActiveUsers = function (opts) {
+  opts = opts || {};
+  var self = this;
+  var params = {
+    ids: self.prefixId(opts.id),
+    "start-date": opts.startDate || "7daysAgo",
+    "end-date": opts.endDate || "yesterday",
+    metrics: "ga:1dayUsers",
     dimensions: "ga:date"
   };
 
