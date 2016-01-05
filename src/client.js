@@ -4,6 +4,10 @@ var Intercom = require('intercom-client');
 var config = require('./config');
 var chalk = require('chalk');
 var Firebase = require('firebase');
+var google = require('googleapis');
+var path = require('path');
+var fs = require('fs');
+var Analyser = require('./Analyser');
 
 /**
  *  @param {Mozaik} mozaik
@@ -16,6 +20,15 @@ const client = function(mozaik) {
     appId: config.get('intercom.appId'), 
     appApiKey: config.get('intercom.token') 
   }).usePromises();
+
+  var keyPath = path.normalize(config.get("analytics.pem"));
+  if (keyPath.substr(0, 1) !== "/") {
+    keyPath = path.join(process.cwd(), keyPath);
+  }
+  if (!fs.existsSync(keyPath)) {
+    mozaik.logger.error("Failed to find analytics .PEM file: %s -- ignoring API", keyPath);
+  }
+  var analyzer = new Analyser(config.get('analytics.email'), fs.readFileSync(keyPath).toString());
 
 
   const apiCalls = {
@@ -91,6 +104,13 @@ const client = function(mozaik) {
             });
           }
         });
+      });
+    },
+    getActiveUsers(params) {
+      return analyzer.getPageViews({
+        id: params.id,
+        startDate: params.startDate,
+        endDate: params.endDate
       });
     }
   };
