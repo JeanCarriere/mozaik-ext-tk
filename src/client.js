@@ -1,6 +1,9 @@
+import request from 'superagent-bluebird-promise';
+import Promise from 'bluebird';
 var Intercom = require('intercom-client');
 var config = require('./config');
 var chalk = require('chalk');
+var Firebase = require('firebase');
 
 /**
  *  @param {Mozaik} mozaik
@@ -56,9 +59,33 @@ const client = function(mozaik) {
     },
     getMessagesCount(params) {
       mozaik.logger.info(chalk.yellow(`[intercom] calling messages`));
-      
+      let req = request.get('https://signup.talkspirit.com/internal/api/v1/analytics?size=10000');
+      return req.promise().then(function(res) {
+          var messages = 0;
+          var connectors = 0;
+          for(var i = 0; i < res.body.data.length; i++) {
+            var vendor = res.body.data[i];
+            messages = messages + vendor.message_count;
+            connectors = connectors + vendor.connector_count;
+          }
+          return {
+            messages: messages,
+            connectors: connectors
+          };
+      });
+    },
+    getOnlineUsers(params) {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling messages`));
+      return new Promise(function (resolve, reject) {
+        var connection = new Firebase(params.firebaseUrl);
+        ref.once("value", function(snapshot) {
+          resolve(snapshot.numChildren());
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+          reject();
+        });
+      });
     }
-
   };
 
   return apiCalls;

@@ -25,7 +25,8 @@
     "reflux": "^0.2.5",
     "c3": "^0.4.11-rc4",
     "superagent": "^1.2.0",
-    "superagent-bluebird-promise": "^0.6.0"
+    "superagent-bluebird-promise": "^0.6.0",
+    "firebase": "^2.2.7"
   },
   "devDependencies": {
     "babel": "^5.8.12",
