@@ -14,12 +14,8 @@ const client = function(mozaik) {
     appApiKey: config.get('intercom.token') 
   }).usePromises();
 
-  const apiCalls = {
 
-    getUsersBySegment(params) {
-      mozaik.logger.info(chalk.yellow(`[intercom] calling users for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
-      return intercomClient.users.listBy({segment_id: params.segment}).then(res => res.body);
-    },
+  const apiCalls = {
 
     getCompaniesBySegment(params) {
       mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
@@ -32,6 +28,35 @@ const client = function(mozaik) {
           }
         });
       });
+    },
+    getInvited(params) {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling invited users for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
+      return intercomClient.companies.listBy({segment_id: params.segmentCompanies}).then(function(res) {
+        var invitedUsers = 0;
+        var getAllPages= function(res) {
+          for (var i=0;i<res.body.companies.length;i++) {
+            if(res.body.companies[i].custom_attributes.invited_users) {
+              invitedUsers = invitedUsers + res.body.companies[i].custom_attributes.invited_users;
+            }
+          }
+          if(res.body.pages.page < res.body.pages.total_pages) {
+            return intercomClient.nextPage(res.body.pages).then(function(res2) {
+              return getAllPages(res2);
+            });
+          }
+          return intercomClient.users.listBy({segment_id: params.segment}).then(function(resUsers) {
+            return {
+              invited:invitedUsers,
+              total:resUsers.body.total_count
+            }
+          });
+        }
+        return getAllPages(res);
+      });
+    },
+    getMessagesCount(params) {
+      mozaik.logger.info(chalk.yellow(`[intercom] calling messages`));
+      
     }
 
   };
