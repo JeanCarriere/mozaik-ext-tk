@@ -75,14 +75,21 @@ const client = function(mozaik) {
       });
     },
     getOnlineUsers(params) {
-      mozaik.logger.info(chalk.yellow(`[intercom] calling messages`));
+      mozaik.logger.info(chalk.yellow(`[intercom] calling firebase online users`));
       return new Promise(function (resolve, reject) {
-        var connection = new Firebase(params.firebaseUrl);
-        ref.once("value", function(snapshot) {
-          resolve(snapshot.numChildren());
-        }, function (errorObject) {
-          console.log("The read failed: " + errorObject.code);
-          reject();
+        var ref = new Firebase(config.get('firebase.url'));
+        ref.authWithCustomToken(config.get('firebase.secret'), function(error, authData) {
+          if (error) {
+            console.log("Authentication Failed!", error);
+            reject();
+          } else {
+            ref.child('tk_global_presence').once('value', function(snapshot) {
+              resolve(snapshot.numChildren());
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+              reject();
+            });
+          }
         });
       });
     }
