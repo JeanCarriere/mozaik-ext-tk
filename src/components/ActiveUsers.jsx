@@ -22,14 +22,20 @@ class TimeseriesChart {
         xFormat: '%Y-%m-%d',
         columns: []
       },
-      axis: {
+      color: {
+      pattern: ['#eedba5']
+    },
+    axis: {
         x: {
           type: 'timeseries'
         },
         y: {
           min: 0
         }
-      }
+    },
+    legend: {
+        hide: true
+    }
     });
   }
 
@@ -39,8 +45,7 @@ class TimeseriesChart {
 
   loadEntries(entries) {
     var xData = [];
-    var visitsData = [];
-    var sessionsData = [];
+    var activeData = [];
     var weekDayRegions = [];
 
     if (!entries || entries.length === 0) {
@@ -49,8 +54,9 @@ class TimeseriesChart {
     }
 
     _.each(entries, function(entry) {
-      //
-      var entryObj = _.zipObject(['date', 'views', 'sessions'], entry);
+      var entryObj = _.zipObject(['date', 'active'], entry);
+      console.log('entryObj',entryObj);
+      
       var date = moment(entryObj.date.value, 'YYYYMMDD');
 
       // Mark Sat and Sun with region
@@ -63,15 +69,14 @@ class TimeseriesChart {
       };
 
       xData.push(date.format('YYYY-MM-DD'));
-      visitsData.push(parseInt(entryObj.views.value, 10));
-      sessionsData.push(parseInt(entryObj.sessions.value, 10));
+
+      activeData.push(parseInt(entryObj.active.value, 10));
     });
 
     return this.load({
       columns: [
         ['x'].concat(xData),
-        ['Page views'].concat(visitsData),
-        ['Sessions'].concat(sessionsData)
+        ['Active'].concat(activeData)
       ],
       regions: weekDayRegions
     });
@@ -126,7 +131,7 @@ class ActiveUsers extends Component {
         return (
             <div>
                 <div className="widget__header">
-                  Active Users (1 day) #{this.state.total}
+                  Active Users (1 day)
                 </div>
                 <div className="widget__body">
                     <div ref="chart" className="widget__chart"></div>

@@ -1,17 +1,62 @@
 {
-  "name": "mozaik-ext-tk",
-  "version": "1.0.0",
-  "description": "Mozaik TK widget",
-  "main": "./src/components/index.js",
-  "scripts": {
-    "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js",
-    "eslint": "eslint ./src/*"
+  "_args": [
+    [
+      "mozaik-ext-tk@git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+      "/Users/jeancarriere/Documents/apps/mozaik-demo"
+    ]
+  ],
+  "_from": "git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+  "_id": "mozaik-ext-tk@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/mozaik-ext-tk",
+  "_phantomChildren": {
+    "component-emitter": "1.1.2",
+    "core-util-is": "1.0.2",
+    "debug": "2.2.0",
+    "formidable": "1.0.14",
+    "inherits": "2.0.1",
+    "isarray": "0.0.1",
+    "mime": "1.3.4",
+    "reduce-component": "1.0.1",
+    "string_decoder": "0.10.31"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JeanCarriere/mozaik-ext-tk.git"
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@raw.githubusercontent.com/JeanCarriere/mozaik-ext-tk/master/package.json",
+      "gitUrl": "git://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+      "httpsUrl": "git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+      "shortcut": "github:JeanCarriere/mozaik-ext-tk",
+      "ssh": "git@github.com:JeanCarriere/mozaik-ext-tk.git",
+      "sshUrl": "git+ssh://git@github.com/JeanCarriere/mozaik-ext-tk.git",
+      "type": "github"
+    },
+    "name": "mozaik-ext-tk",
+    "raw": "mozaik-ext-tk@git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+    "rawSpec": "git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+    "scope": null,
+    "spec": "git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+    "type": "hosted"
   },
-  "author": "Jean Carriere",
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git#02835fd8f11ba15ab1b9607f0affee2e2d9bf837",
+  "_shasum": "4a073cdcf422020a5e68dccd1a0a125d8fe78a50",
+  "_shrinkwrap": null,
+  "_spec": "mozaik-ext-tk@git+https://0abbc23f9be3e9a6021fa1353942161df78358e9:x-oauth-basic@github.com/JeanCarriere/mozaik-ext-tk.git",
+  "_where": "/Users/jeancarriere/Documents/apps/mozaik-demo",
+  "author": {
+    "name": "Jean Carriere"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/JeanCarriere/mozaik-ext-tk/issues"
+  },
   "dependencies": {
     "babelify": "^6.1.3",
     "c3": "^0.4.11-rc4",
@@ -29,6 +74,7 @@
     "superagent": "^1.2.0",
     "superagent-bluebird-promise": "^0.6.0"
   },
+  "description": "Mozaik TK widget",
   "devDependencies": {
     "babel": "^5.8.12",
     "babel-eslint": "^1.0.6",
@@ -39,12 +85,23 @@
     "mockery": "^1.4.0",
     "sinon": "^1.15.4"
   },
+  "gitHead": "02835fd8f11ba15ab1b9607f0affee2e2d9bf837",
+  "homepage": "https://github.com/JeanCarriere/mozaik-ext-tk#readme",
+  "main": "./src/components/index.js",
+  "name": "mozaik-ext-tk",
+  "optionalDependencies": {},
   "peerDependencies": {
     "mozaik": "1.x"
   },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  }
+  "readme": "# Mozaik-ext-tk",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeanCarriere/mozaik-ext-tk.git"
+  },
+  "scripts": {
+    "eslint": "eslint ./src/*",
+    "test": "mocha --opts mocha.opts ./src/tests/**/*.test.js"
+  },
+  "version": "1.0.0"
 }
