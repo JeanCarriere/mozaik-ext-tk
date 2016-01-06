@@ -2,7 +2,7 @@
   "name": "mozaik-ext-tk",
   "version": "0.1.0",
   "description": "TK widgets for Mozaïk dashboard",
-  "main": "./components.js",
+  "main": "./src/components/index.js",
   "author": {
     "name": "JeanCarriere"
   },
