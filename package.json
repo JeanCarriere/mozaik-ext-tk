@@ -40,5 +40,10 @@
   },
   "peerDependencies": {
     "mozaik": "*"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   }
 }
