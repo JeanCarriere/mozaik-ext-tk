@@ -29,14 +29,26 @@
 .c3-gauge-value {
   font-size: 50px;
 }
-.c3-target-Invited, .c3-target-SignedUp , .c3-target-Mess-, .c3-target-Connectors  {
+.c3-target-Invited, .c3-target-SignedUp , .c3-target-Mess-, .c3-target-Connectors,
+.c3-target-Active, .c3-target-Inactive {
   fill: #eedba5;
-  font-size: 14px;
+  font-size: 23px;
+  z-index:1000;
+  font-family : arial;
+}
+.c3-target-ActiveUsers {
+  fill: #323F53;
+  fill-opacity: 0;
 }
 
 .widget_value {
   height: 100%;
+  font-family : arial;
   text-align: center;
-  font-size: 70px;
-  margin-top: 50px;
+  font-size: 50px;
+  line-height:60px;
+  padding-top: 30px;
+}
+.widget_value_small {
+  font-size: 30px;
 }

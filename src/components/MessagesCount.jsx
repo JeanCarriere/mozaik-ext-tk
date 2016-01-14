@@ -26,7 +26,7 @@ class DonutChart {
           pattern: ['#1f77b4', '#60B044']
         },
         legend: {
-          hide: true
+            hide: true
         }
     });
   }
@@ -68,8 +68,8 @@ class MessagesCount extends Component {
 
     onApiData(response) {
         var data = [
-            ['Mess.', response.messages],
-            ['Connectors', response.connectors]
+            ['Connectors', response.connectors],
+            ['Mess.', response.messages]
             ];
         if(!this.chart) {
             var chartElement = React.findDOMNode(this.refs.chart);

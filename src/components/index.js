@@ -4,6 +4,7 @@ import UsersCount from './UsersCount.jsx';
 import MessagesCount from './MessagesCount.jsx';
 import OnlineUsers from './OnlineUsers.jsx';
 import ActiveUsers from './ActiveUsers.jsx';
+import Paying from './Paying.jsx';
 
 export default {
   BiggestCompaniesList: BiggestCompaniesList,
@@ -11,5 +12,6 @@ export default {
   UsersCount:UsersCount,
   MessagesCount:MessagesCount,
   OnlineUsers:OnlineUsers,
-  ActiveUsers:ActiveUsers
+  ActiveUsers:ActiveUsers,
+  Paying:Paying
 };

@@ -4,28 +4,31 @@ import { ListenerMixin } from 'reflux';
 import Mozaik from 'mozaik/browser';
 import c3 from 'c3';
 
-class GaugeChart {
+class DonutChart {
 
   constructor(bindTo, opts, data) {
     this.chart = c3.generate({
-    	bindto: bindTo,
-    	data: {
-    		columns: [data],
-            type: 'gauge'
+        bindto: bindTo,
+        data: {
+            columns: data,
+            type: 'donut'
         },
-	    gauge: {
-	        label: {
-	            format: function(value, ratio) {
-	                return value;
-	            },
-				show: true
-	        },
-			max: opts.max
-		},
-		color: {
-			pattern: ['#60B044']
-		}
-	});
+        donut: {
+            label: {
+                format: function(value, ratio, id) {
+                    console.log('format', arguments);
+                    return value + ' ' + id;
+                },
+                show: true
+            }
+        },
+        color: {
+          pattern: ['#1f77b4', '#60B044']
+        },
+        legend: {
+	        hide: true
+	    }
+    });
   }
 
   load(data) {
@@ -33,8 +36,8 @@ class GaugeChart {
   }
 
   destroy () {
-  	console.log('destroy chart');	
-  	this.chart.destroy();
+    console.log('destroy chart');   
+    this.chart.destroy();
   }
 }
 
@@ -44,7 +47,8 @@ class SegmentCompaniesCount extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			total: 0
+			total: 0,
+			active:0
 		};
 	}
 
@@ -67,25 +71,23 @@ class SegmentCompaniesCount extends Component {
 	}
 
 	onApiData(response) {
-		if(response.segment && response.segment.total_count) {
-			if(response.total.total_count !== this.state.total || !this.chart) {
-				if (this.chart) {
-					this.chart.destroy();
-			    }
-
-				var chartElement = React.findDOMNode(this.refs.chart);
-				this.chart = new GaugeChart(chartElement, {max: response.total.total_count, min:0}, ['data', response.segment.total_count]);
-			} else if(response.segment.total_count !== this.state.segment){
-				this.chart.load({
-					columns: [['data', response.segment.total_count]]
-				})
-			}
-			this.setState({
-				segment: response.segment.total_count,
-				total: response.total.total_count,
-			});
-		}
-	}
+        var data = [
+            ['Active', response.segment.total_count],
+            ['Inactive', response.total.total_count - response.segment.total_count]
+            ];
+        if(!this.chart) {
+            var chartElement = React.findDOMNode(this.refs.chart);
+            this.chart = new DonutChart(chartElement, null, data);
+        } else if(this.state.messages !== response.messages || this.state.connectors !== response.connectors) {
+            this.chart.load({
+                columns: data
+            });
+        }
+        this.setState({
+            active: response.segment.total_count,
+            total: response.total.total_count,
+        });
+    }
 
 	render() {
 		return (

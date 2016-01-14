@@ -134,7 +134,7 @@ Analyzer.prototype.getActiveUsers = function (opts) {
   var self = this;
   var params = {
     ids: self.prefixId(opts.id),
-    "start-date": opts.startDate || "7daysAgo",
+    "start-date": opts.startDate || "30daysAgo",
     "end-date": opts.endDate || "yesterday",
     metrics: "ga:1dayUsers",
     dimensions: "ga:date"
