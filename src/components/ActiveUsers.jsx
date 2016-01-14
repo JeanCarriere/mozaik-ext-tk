@@ -76,7 +76,7 @@ class TimeseriesChart {
     return this.load({
       columns: [
         ['x'].concat(xData),
-        ['Active'].concat(activeData)
+        ['ActiveUsers'].concat(activeData)
       ],
       regions: weekDayRegions
     });
