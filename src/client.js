@@ -17,24 +17,24 @@ const client = function(mozaik) {
   mozaik.loadApiConfig(config);
 
   const intercomClient = new Intercom.Client({ 
-    appId: config.get('intercom.appId'), 
-    appApiKey: config.get('intercom.token') 
+    appId: config.get('tk.intercomAppId'), 
+    appApiKey: config.get('tk.intercomToken') 
   }).usePromises();
 
-  var keyPath = path.normalize(config.get("analytics.pem"));
+  var keyPath = path.normalize(config.get("tk.gaPem"));
   if (keyPath.substr(0, 1) !== "/") {
     keyPath = path.join(process.cwd(), keyPath);
   }
   if (!fs.existsSync(keyPath)) {
     mozaik.logger.error("Failed to find analytics .PEM file: %s -- ignoring API", keyPath);
   }
-  var analyzer = new Analyser({serviceEmail:config.get('analytics.email'), serviceKey:fs.readFileSync(keyPath).toString()});
+  var analyzer = new Analyser({serviceEmail:config.get('tk.gaEmail'), serviceKey:fs.readFileSync(keyPath).toString()});
 
 
   const apiCalls = {
 
     getCompaniesBySegment(params) {
-      mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
+      mozaik.logger.info(chalk.yellow(`[intercom] calling companies for appId: ${config.get('tk.intercomAppId')} and segment: ${params.segment}`));
       return intercomClient.companies.list().then(function(resTot) {
         return intercomClient.companies.listBy({segment_id: params.segment, per_page: 50}).then(function(res) {
           mozaik.logger.info(chalk.yellow(`restTot : ${resTot.body.total_count} ${res.body.total_count}`));
@@ -46,7 +46,7 @@ const client = function(mozaik) {
       });
     },
     getInvited(params) {
-      mozaik.logger.info(chalk.yellow(`[intercom] calling invited users for appId: ${config.get('intercom.appId')} and segment: ${params.segment}`));
+      mozaik.logger.info(chalk.yellow(`[intercom] calling invited users for appId: ${config.get('tk.intercomAppId')} and segment: ${params.segment}`));
       return intercomClient.companies.listBy({segment_id: params.segmentCompanies}).then(function(res) {
         var invitedUsers = 0;
         var getAllPages= function(res) {
@@ -90,8 +90,8 @@ const client = function(mozaik) {
     getOnlineUsers(params) {
       mozaik.logger.info(chalk.yellow(`[intercom] calling firebase online users`));
       return new Promise(function (resolve, reject) {
-        var ref = new Firebase(config.get('firebase.url'));
-        ref.authWithCustomToken(config.get('firebase.secret'), function(error, authData) {
+        var ref = new Firebase(config.get('tk.firebaseUrl'));
+        ref.authWithCustomToken(config.get('tk.firebaseSecret'), function(error, authData) {
           if (error) {
             console.log("Authentication Failed!", error);
             reject();
@@ -108,6 +108,13 @@ const client = function(mozaik) {
     },
     getActiveUsers(params) {
       return analyzer.getActiveUsers({
+        id: params.id,
+        startDate: params.startDate,
+        endDate: params.endDate
+      });
+    },
+    getNewCompanies(params) {
+      return analyzer.getNewCompanies({
         id: params.id,
         startDate: params.startDate,
         endDate: params.endDate

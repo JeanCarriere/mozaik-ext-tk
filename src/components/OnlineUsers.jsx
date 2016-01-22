@@ -16,7 +16,7 @@ class OnlineUsers extends Component {
 
     getApiRequest() {
         return {
-            id: `intercom.getOnlineUsers`
+            id: `tk.getOnlineUsers`
         }
     }
 

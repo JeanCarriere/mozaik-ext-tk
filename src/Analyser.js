@@ -143,4 +143,19 @@ Analyzer.prototype.getActiveUsers = function (opts) {
   return self.request(params, self.mapRequestResponse);
 };
 
+Analyzer.prototype.getNewCompanies = function (opts) {
+  opts = opts || {};
+  var self = this;
+  var params = {
+    ids: self.prefixId(opts.id),
+    "start-date": opts.startDate || "30daysAgo",
+    "end-date": opts.endDate || "yesterday",
+    metrics: "ga:newUsers",
+    dimensions: "ga:date",
+    filters:"ga:dimension1==administrator"
+  };
+
+  return self.request(params, self.mapRequestResponse);
+};
+
 module.exports = Analyzer;

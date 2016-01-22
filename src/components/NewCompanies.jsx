@@ -76,14 +76,14 @@ class TimeseriesChart {
     return this.load({
       columns: [
         ['x'].concat(xData),
-        ['ActiveUsers'].concat(activeData)
+        ['NewCompanies'].concat(activeData)
       ],
       regions: weekDayRegions
     });
   }
 };
 
-class ActiveUsers extends Component {
+class NewCompanies extends Component {
     
 
     constructor(props) {
@@ -97,7 +97,7 @@ class ActiveUsers extends Component {
     getApiRequest() {
         let { id } = this.props; 
         return {
-            id: `tk.getActiveUsers`,
+            id: `tk.getNewCompanies`,
             params:{
                 id:id
             }
@@ -105,6 +105,8 @@ class ActiveUsers extends Component {
     }
 
     onApiData(data) {
+      console.log('data results companies', data.results);
+        
         var total = data.totalsForAllResults['ga:1dayUsers'] || null;
         var avg = Math.floor(total / data.totalResults, -1);
 
@@ -130,7 +132,7 @@ class ActiveUsers extends Component {
         return (
             <div>
                 <div className="widget__header">
-                  Active Users (1 day)
+                  New Companies (1 day)
                 </div>
                 <div className="widget__body">
                     <div ref="chart" className="widget__chart"></div>
@@ -140,7 +142,7 @@ class ActiveUsers extends Component {
     }
 }
 
-reactMixin(ActiveUsers.prototype, ListenerMixin);
-reactMixin(ActiveUsers.prototype, Mozaik.Mixin.ApiConsumer);
+reactMixin(NewCompanies.prototype, ListenerMixin);
+reactMixin(NewCompanies.prototype, Mozaik.Mixin.ApiConsumer);
 
-export { ActiveUsers as default };
+export { NewCompanies as default };

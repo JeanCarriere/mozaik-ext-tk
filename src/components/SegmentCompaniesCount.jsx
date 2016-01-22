@@ -26,8 +26,8 @@ class DonutChart {
           pattern: ['#1f77b4', '#60B044']
         },
         legend: {
-	        hide: true
-	    }
+            hide: true
+        }
     });
   }
 
@@ -42,35 +42,35 @@ class DonutChart {
 }
 
 class SegmentCompaniesCount extends Component {
-	
+    
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			total: 0,
-			active:0
-		};
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+            total: 0,
+            active:0
+        };
+    }
 
-	componentWillUnmount() {
-	    if (this.chart) {
-	    	this.chart.destroy();
-	    }
-  	}
+    componentWillUnmount() {
+        if (this.chart) {
+            this.chart.destroy();
+        }
+    }
 
-	getApiRequest() {
-		let { segment, title } = this.props; 
+    getApiRequest() {
+        let { segment, title } = this.props; 
 
-		return {
-			id: `intercom.getCompaniesBySegment.${ segment }`,
-			params: {
-				segment: segment,
-				title: title
-			}
-		}
-	}
+        return {
+            id: `tk.getCompaniesBySegment.${ segment }`,
+            params: {
+                segment: segment,
+                title: title
+            }
+        }
+    }
 
-	onApiData(response) {
+    onApiData(response) {
         var data = [
             ['Active', response.segment.total_count],
             ['Inactive', response.total.total_count - response.segment.total_count]
@@ -89,19 +89,19 @@ class SegmentCompaniesCount extends Component {
         });
     }
 
-	render() {
-		return (
-			<div>
-				<div className="widget__header">
-		          Active companies (7 days)
-		        </div>
-	        	<div className="widget__body">
-	        		<div ref="chart"></div>
-					
-				</div>
-			</div>
-		)
-	}
+    render() {
+        return (
+            <div>
+                <div className="widget__header">
+                  Active companies (7 days)
+                </div>
+                <div className="widget__body">
+                    <div ref="chart"></div>
+                    
+                </div>
+            </div>
+        )
+    }
 }
 
 reactMixin(SegmentCompaniesCount.prototype, ListenerMixin);

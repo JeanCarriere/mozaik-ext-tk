@@ -1,14 +1,14 @@
 var convict = require('convict');
 
 var config = convict({
-    intercom: {
-        appId: {
+    tk: {
+        intercomAppId: {
             doc:    'the intercom app id ',
             default: '',
             format:  String,
             env:     'INTERCOM_APP_ID'
         },
-        token: {
+        intercomToken: {
             doc:    'The intercom API token.',
             default: '',
             format:  String,

@@ -62,7 +62,7 @@ class MessagesCount extends Component {
         let { segment, title, segmentCompanies } = this.props; 
 
         return {
-            id: `intercom.getMessagesCount`,
+            id: `tk.getMessagesCount`,
         }
     }
 

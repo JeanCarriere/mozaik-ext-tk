@@ -18,7 +18,7 @@ class Paying extends Component {
     getApiRequest() {
         let { segment, title } = this.props; 
         return {
-            id: `intercom.getCompaniesBySegment.${ segment }`,
+            id: `tk.getCompaniesBySegment.${ segment }`,
             params: {
                 segment: segment,
                 title: title

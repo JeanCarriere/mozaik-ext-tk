@@ -60,7 +60,7 @@ class UsersCount extends Component {
         let { segment, title, segmentCompanies } = this.props; 
 
         return {
-            id: `intercom.getInvited.${ segment }`,
+            id: `tk.getInvited.${ segment }`,
             params: {
                 segment: segment,
                 segmentCompanies:segmentCompanies,
