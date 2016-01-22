@@ -152,7 +152,7 @@ Analyzer.prototype.getNewCompanies = function (opts) {
     "end-date": opts.endDate || "yesterday",
     metrics: "ga:newUsers",
     dimensions: "ga:date",
-    filters:"ga:dimension1==administrator"
+    filters:"ga:dimension1==owner"
   };
 
   return self.request(params, self.mapRequestResponse);
