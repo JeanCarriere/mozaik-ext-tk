@@ -97,7 +97,17 @@ const client = function(mozaik) {
             reject();
           } else {
             ref.child('tk_global_presence').once('value', function(snapshot) {
-              resolve(snapshot.numChildren());
+              var users = snapshot.val();
+              var count = 0;
+              if(users) {
+                for(var userId in users) {
+                  var userTimestamp = users[userId];
+                  if(userTimestamp === true || userTimestamp > new Date().getTime() - 24 * 3600 * 1000) {
+                    count ++;
+                  }
+                }
+              }
+              resolve(count);
             }, function (errorObject) {
               console.log("The read failed: " + errorObject.code);
               reject();
